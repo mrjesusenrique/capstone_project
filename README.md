@@ -15,25 +15,16 @@ Este proyecto es una utilidad de consola escrita en Python que genera archivos d
 
 ## 📁 Estructura del proyecto
 
-capstone_project/
-├── src/
-│ ├── main.py # Punto de entrada del programa
-│ ├── config.py # Carga y validación de configuración
-│ ├── generator.py # Lógica de generación de datos
-│ ├── schema_parser.py # Interpretación del esquema
-│ ├── utils.py # Funciones auxiliares
-│ └── logger.py # Configuración de logging
-├── tests/ # Pruebas automatizadas
-├── default.ini # Configuración por defecto
-├── requirements.txt # Dependencias del proyecto
-└── README.md # Este archivo
+<pre lang="markdown"> ``` capstone_project/ ├── src/ │ ├── main.py # Punto de entrada del programa │ ├── config.py # Carga y validación de configuración │ ├── generator.py # Lógica de generación de datos │ ├── schema_parser.py # Interpretación del esquema │ ├── utils.py # Funciones auxiliares │ └── logger.py # Configuración de logging ├── tests/ # Pruebas automatizadas ├── default.ini # Configuración por defecto ├── requirements.txt # Dependencias del proyecto └── README.md ``` </pre>
 
 ## ⚙️ Instalación
 
 1. Clonar el repositorio:
 
 ```bash
-git clone https://github.com/tu_usuario/capstone_project.git
+git clone git@github.com:mrjesusenrique/capstone_project.git
+o
+git clone https://github.com/mrjesusenrique/capstone_project.git
 cd capstone_project
 
 pip install -r requirements.txt
@@ -60,3 +51,4 @@ file_name = data
 file_prefix = count
 lines_per_file = 10
 multiprocessing = 1
+```
