@@ -4,7 +4,6 @@ import time
 import os
 import logging
 
-
 def generate_uuid():
     return str(uuid.uuid4())
 

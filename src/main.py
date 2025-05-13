@@ -34,6 +34,11 @@ def main():
     # Parsear argumentos
     args = parse_arguments(defaults)
 
+    # Valida el parámetro lines_per_file
+    if args.lines_per_file is None:
+        logging.error("El valor 'lines_per_file' no está definido en los argumentos ni en default.ini.")
+        sys.exit(1)
+
     # Validaciones mínimas
     if args.files_count < 0:
         logging.error('--files_count no puede ser negativo.')

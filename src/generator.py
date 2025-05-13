@@ -1,58 +1,55 @@
 import json
 import os
 import logging
+import time
+import uuid
+import random
 
 from multiprocessing import Process, current_process, cpu_count
 from schema_parser import parse_schema
 from utils import (
     generate_uuid,
     generate_random_int,
-    generate_timestamp,
-    choose_random_from_list,
     clear_output_path
 )
 
-def generate_value(field_type, instruction):
+def generate_value(field_spec):
+    field_type = field_spec["type"]
+    mode = field_spec.get("mode")
+
     if field_type == "str":
-        if instruction == "rand":
-            return generate_uuid()
-        elif isinstance(instruction, str):
-            return instruction
-        elif isinstance(instruction, list):
-            return choose_random_from_list(instruction)
+        if mode == "uuid":
+            return str(uuid.uuid4())
+        elif mode == "choice":
+            return random.choice(field_spec["options"])
+        elif mode == "fixed":
+            return field_spec["value"]
         else:
             return ""
+        
     elif field_type == "int":
-        if isinstance(instruction, list):
-            return choose_random_from_list(instruction)
-        elif isinstance(instruction, str) and instruction.startswith("rand("):
-            try:
-                parts = instruction[5:-1].split(",")
-                return generate_random_int(int(parts[0]), int(parts[1]))
-            except Exception:
-                logging.error(f"Instrucción rand inválida: {instruction}")
-                return None
-        elif isinstance(instruction, str):
-            try:
-                return int(instruction)
-            except ValueError:
-                logging.error(f"No se pudo convertir '{instruction}' a int")
-                return None
+        if mode == "range":
+            return random.randint(field_spec["min"], field_spec["max"])
+        elif mode == "choice":
+            return random.choice(field_spec["options"])
+        elif mode == "fixed":
+            return field_spec["value"]
         else:
             return None
+
     elif field_type == "timestamp":
-        if instruction:
-            logging.warning("El tipo 'timestamp' no admite valores adicionales. Se ignorará.")
-        return generate_timestamp()
+        return time.time()
+
     else:
         logging.error(f"Tipo no soportado: {field_type}")
         return None
 
+
 def generate_record(schema):
-    return {
-        key: generate_value(spec["type"], spec["instruction"])
-        for key, spec in schema.items()
-    }
+    record = {}
+    for key, spec in schema.items():
+        record[key] = generate_value(spec)
+    return record
 
 def write_file(path, base_name, prefix, schema, lines, index=None):
     records = [generate_record(schema) for _ in range(lines)]

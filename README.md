@@ -52,3 +52,20 @@ file_prefix = count
 lines_per_file = 10
 multiprocessing = 1
 ```
+
+## ⚙️ ¿Cómo usar?
+
+Enviando parámetros customizados
+```bash
+python src/main.py --data_schema schema.json --files_count 5 --lines_per_file 10 --multiprocessing 2
+```
+
+Sin parámetros para que tome los valores por defecto en default.ini
+```bash
+python src/main.py --data_schema schema.json
+```
+
+Prueba en consola sin generar archivos con datos
+```bash
+python src/main.py --data_schema schema.json --files_count 0 --lines_per_file 3
+```
