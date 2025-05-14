@@ -6,8 +6,9 @@ import uuid
 import random
 
 from multiprocessing import Process, current_process, cpu_count
-from schema_parser import parse_schema
-from utils import (
+from src.schema_parser import parse_schema
+
+from src.utils import (
     generate_uuid,
     generate_random_int,
     clear_output_path
