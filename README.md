@@ -57,15 +57,42 @@ multiprocessing = 1
 
 Enviando parámetros customizados
 ```bash
-python src/main.py --data_schema schema.json --files_count 5 --lines_per_file 10 --multiprocessing 2
+python -m src.main --data_schema schema.json --files_count 5 --lines_per_file 10 --multiprocessing 2
 ```
 
 Sin parámetros para que tome los valores por defecto en default.ini
 ```bash
-python src/main.py --data_schema schema.json
+python -m src.main --data_schema schema.json
 ```
 
 Prueba en consola sin generar archivos con datos
 ```bash
-python src/main.py --data_schema schema.json --files_count 0 --lines_per_file 3
+python -m src.main --data_schema schema.json --files_count 0 --lines_per_file 3
+```
+
+## ⚙️ Tests
+
+Test Schema Parser
+```bash
+pytest tests/test_schema_parser.py -v
+```
+
+Test Utils
+```bash
+pytest tests/test_utils.py -v
+```
+
+Test Generator
+```bash
+pytest tests/test_generator.py -v
+```
+
+Test Config
+```bash
+pytest tests/test_config.py -v
+```
+
+Test Logger
+```bash
+pytest tests/test_logger.py -v
 ```
