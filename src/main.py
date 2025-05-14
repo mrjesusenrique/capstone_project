@@ -3,9 +3,9 @@ import sys
 import os
 import logging
 
-from generator import generate_files
-from config import load_config
-from logger import setup_logger
+from .generator import generate_files
+from .config import load_config
+from .logger import setup_logger
 
 def parse_arguments(defaults):
     parser = argparse.ArgumentParser(

@@ -2,7 +2,6 @@ import configparser
 import sys
 import logging
 
-
 def load_config(path='default.ini'):
     config = configparser.ConfigParser()
     read_files = config.read(path)
